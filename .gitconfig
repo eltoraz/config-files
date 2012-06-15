@@ -1,0 +1,21 @@
+[user]
+    name = Bill Jameson
+    email = hothousevt@gmail.com
+[github]
+    user = eltoraz
+    token = GITHUB TOKEN
+[core]
+    excludesfile = /home/eltoraz/.gitignore_global
+    editor = vim
+[color]
+    diff = auto
+    status = auto
+    branch = auto
+    interactive = true
+[alias]
+    st = status
+    ci = commit
+    br = branch
+    co = checkout
+    df = diff
+    lg = log --oneline --graph --decorate

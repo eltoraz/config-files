@@ -33,6 +33,14 @@
 ehthumbs.db
 Icon?
 Thumbs.db
+.directory
 
 # Ignore Subversion stuff
 .svn/
+
+# Java bytecode
+*.class
+*.jar
+
+# Temp/swap files
+*.swp

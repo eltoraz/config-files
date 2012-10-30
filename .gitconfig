@@ -1,9 +1,6 @@
 [user]
     name = Bill Jameson
     email = williamjameson@alum.rpi.edu
-[github]
-    user = eltoraz
-    token = GITHUB TOKEN
 [core]
     excludesfile = /home/eltoraz/.gitignore_global
     editor = vim

@@ -154,3 +154,10 @@ else
     fi
 fi
 
+# function/alias to get a thumbnail from a video with avconv
+# 3 args, respectively: input video, time offset (in seconds), output file
+_thumbnail() {
+    avconv -i $1 -f image2 -ss $2 -vframes 1 $3
+}
+alias thumb=_thumbnail
+

@@ -161,3 +161,9 @@ _thumbnail() {
 }
 alias thumb=_thumbnail
 
+# function/alias to transcode a video to CRF 14 H.264/AAC MP4 (esp. helpful with large FRAPS files)
+# 2 args: input video, output name
+_transcode() {
+    avconv -i $1 -threads 2 -c:v libx264 -preset slow -crf 14 -c:a aac -strict experimental $2
+}
+alias transcode=_transcode

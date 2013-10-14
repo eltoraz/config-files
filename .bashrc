@@ -106,6 +106,11 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
+# additional functions
+if [ -f ~/.bash_functions ]; then
+    . ~/.bash_functions
+fi
+
 # ssh-agent stuff
 
 SSH_ENV="$HOME/.ssh/environment"
@@ -153,17 +158,3 @@ else
         start_agent
     fi
 fi
-
-# function/alias to get a thumbnail from a video with avconv
-# 3 args, respectively: input video, time offset (in seconds), output file
-_thumbnail() {
-    avconv -i $1 -f image2 -ss $2 -vframes 1 $3
-}
-alias thumb=_thumbnail
-
-# function/alias to transcode a video to CRF 14 H.264/AAC MP4 (esp. helpful with large FRAPS files)
-# 2 args: input video, output name
-_transcode() {
-    avconv -i $1 -c:v libx264 -preset medium -crf 16 -c:a aac -strict experimental $2
-}
-alias transcode=_transcode

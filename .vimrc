@@ -7,3 +7,5 @@ set expandtab
 set nobackup
 set writebackup
 syntax on
+au BufReadPost *.atom set syntax=xml
+

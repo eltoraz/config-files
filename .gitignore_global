@@ -44,3 +44,7 @@ Thumbs.db
 
 # Temp/swap files
 *.swp
+
+# Python stuff
+__pycache__/
+

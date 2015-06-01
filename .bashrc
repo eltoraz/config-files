@@ -159,5 +159,5 @@ else
     fi
 fi
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+PATH=$HOME/.local/bin:$HOME/.rvm/bin:$PATH
 source ~/.rvm/scripts/rvm

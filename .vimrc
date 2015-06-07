@@ -5,7 +5,7 @@ set number
 set ruler
 set laststatus=2
 set showcmd
-set scrolloff=5             " min # of lines above/below the cursor to keep onscreen
+set scrolloff=3             " min # of lines above/below the cursor to keep onscreen
 
 " use TAB for autocomplete
 set wildmenu

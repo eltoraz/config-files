@@ -30,7 +30,7 @@ alias batch_transcode=_batch_transcode
 # 2 args: input video, output file
 _extract_audio() {
     AUDIO_CODEC='libmp3lame'
-    BITRATE='128k'
+    BITRATE='192k'
     avconv -i "$1" -vn -c:a $AUDIO_CODEC -ab $BITRATE "$2"
 }
 alias extract_audio=_extract_audio

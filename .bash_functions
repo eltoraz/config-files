@@ -58,6 +58,6 @@ _batch_extract_audio() {
 alias batch_extract_audio=_batch_extract_audio
 
 _livestreamer() {
-    /home/eltoraz/.local/bin/livestreamer twitch.tv/$1 best
+    ~/.local/bin/livestreamer twitch.tv/$1 best
 }
 alias livestreamer=_livestreamer

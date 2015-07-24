@@ -6,6 +6,7 @@ set ruler
 set laststatus=2
 set showcmd
 set scrolloff=3             " min # of lines above/below the cursor to keep onscreen
+set colorcolumn=80          " mainly as a ruler to help PEP8 compliance in Python
 
 " use TAB for autocomplete
 set wildmenu

@@ -57,7 +57,10 @@ _batch_extract_audio() {
 }
 alias batch_extract_audio=_batch_extract_audio
 
-_livestreamer() {
-    ~/.local/bin/livestreamer twitch.tv/$1 best
+git() {
+    if [[ $@ == "score" ]]; then
+        command git log --pretty=tformat: --numstat --author="Bill Jameson" master | gawk '/./ { plus += $1; minus += $2; files[$3] = 1; } END { printf "%d files ever touched, %d lines added, %d lines removed, final net score %d\n", length(files), plus, minus, plus - minus }'
+    else
+        command git "$@"
+    fi
 }
-alias livestreamer=_livestreamer

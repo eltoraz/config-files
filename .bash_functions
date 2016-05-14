@@ -1,7 +1,7 @@
-# function/alias to get a thumbnail from a video with avconv
+# function/alias to get a thumbnail from a video with ffmpeg
 # 3 args, respectively: input video, time offset (in seconds), output file
 _thumbnail() {
-    avconv -i $1 -f image2 -ss $2 -vframes 1 $3
+    ffmpeg -i $1 -f image2 -ss $2 -vframes 1 $3
 }
 alias thumb=_thumbnail
 
@@ -12,7 +12,7 @@ _transcode() {
     PRESET='medium'
     CRF='14'
     AUDIO_CODEC='aac -strict experimental'
-    avconv -i $1 -c:v $VIDEO_CODEC -preset $PRESET -crf $CRF -c:a $AUDIO_CODEC $2
+    ffmpeg -i $1 -c:v $VIDEO_CODEC -preset $PRESET -crf $CRF -c:a $AUDIO_CODEC $2
 }
 alias transcode=_transcode
 
@@ -31,7 +31,7 @@ alias batch_transcode=_batch_transcode
 _extract_audio() {
     AUDIO_CODEC='libmp3lame'
     BITRATE='192k'
-    avconv -i "$1" -vn -c:a $AUDIO_CODEC -ab $BITRATE "$2"
+    ffmpeg -i "$1" -vn -c:a $AUDIO_CODEC -ab $BITRATE "$2"
 }
 alias extract_audio=_extract_audio
 

@@ -28,7 +28,7 @@ shopt -s checkwinsize
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 # set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
+if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
@@ -40,7 +40,7 @@ esac
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
 # should be on the output of commands, not on the prompt
-#force_color_prompt=yes
+force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
@@ -81,6 +81,9 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
+# colored GCC warnings and errors
+#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
 # some more ls aliases
 alias ll='ls -alF'
 alias la='ls -A'
@@ -99,64 +102,16 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+# Additional functions
+if [ -f ~/.bash_functions ]; then
+    . ~/.bash_functions
+fi
+
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
-fi
-
-# additional functions
-if [ -f ~/.bash_functions ]; then
-    . ~/.bash_functions
-fi
-
-# ssh-agent stuff
-
-SSH_ENV="$HOME/.ssh/environment"
-
-# start the ssh-agent
-function start_agent {
-    echo "Initializing new SSH agent..."
-    # spawn ssh-agent
-    ssh-agent | sed 's/^echo/#echo/' > "$SSH_ENV"
-    echo succeeded
-    chmod 600 "$SSH_ENV"
-    . "$SSH_ENV" > /dev/null
-    ssh-add
-}
-
-# test for identities
-function test_identities {
-    # test whether standard identities have been added to the agent already
-    ssh-add -l | grep "The agent has no identities" > /dev/null
-    if [ $? -eq 0 ]; then
-        ssh-add
-        # $SSH_AUTH_SOCK broken so we start a new proper agent
-        if [ $? -eq 2 ];then
-            start_agent
-        fi
-    fi
-}
-
-# check for running ssh-agent with proper $SSH_AGENT_PID
-if [ -n "$SSH_AGENT_PID" ]; then
-    ps -ef | grep "$SSH_AGENT_PID" | grep ssh-agent > /dev/null
-    if [ $? -eq 0 ]; then
-	test_identities
-    fi
-# if $SSH_AGENT_PID is not properly set, we might be able to load one from
-# $SSH_ENV
-else
-    if [ -f "$SSH_ENV" ]; then
-	. "$SSH_ENV" > /dev/null
-    fi
-    ps -ef | grep "$SSH_AGENT_PID" | grep -v grep | grep ssh-agent > /dev/null
-    if [ $? -eq 0 ]; then
-        test_identities
-    else
-        start_agent
-    fi
 fi
 
 PATH=$HOME/.local/bin:$HOME/.rvm/bin:$PATH

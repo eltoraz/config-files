@@ -36,4 +36,4 @@
     lg = log --oneline --graph --decorate
 
 [push]
-	defaut = simple
+	default = simple

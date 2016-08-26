@@ -64,3 +64,9 @@ git() {
         command git "$@"
     fi
 }
+
+# recursively count the total number of lines in files that match the pattern in the first argument
+_linecount() {
+    find . -name '$1' | xargs wc -l
+}
+alias linecount=_linecount
